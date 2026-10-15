@@ -1,0 +1,70 @@
+class Solution {
+    public int romanToInt(String s) {
+        char priorSymbol = 0;
+        int val = 0;
+        for(int i = 0; i < s.length(); i++) {
+            switch(s.charAt(i)) {
+            case 'I':
+                val += 1;
+                priorSymbol = 'I';
+                break;
+            case 'V':
+                val += 5;
+                if(priorSymbol == 'I') {
+                    val -= 2;
+                }
+                priorSymbol = 'V';
+                break;
+            case 'X':
+                val += 10;
+                if(priorSymbol == 'I') {
+                    val -= 2;
+                }
+                priorSymbol = 'X';
+                break;
+            case 'L':
+                val += 50;
+                if(priorSymbol == 'X') {
+                    val -= 20;
+                }
+                priorSymbol = 'L';
+                break;
+            case 'C':
+                val += 100;
+                if(priorSymbol == 'X') {
+                    val -= 20;
+                }
+                priorSymbol = 'C';
+                break;
+            case 'D':
+                val += 500;
+                if(priorSymbol == 'C') {
+                    val -= 200;
+                }
+                priorSymbol = 'D';
+                break;
+            case 'M':
+                val += 1000;
+                if(priorSymbol == 'C') {
+                    val -= 200;
+                }
+                priorSymbol = 'M';
+                break;
+            }
+        }
+        return val;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Test cases
+        String test1 = "III";
+        String test2 = "LVIII";
+        String test3 = "MCMXCIV";
+
+        System.out.println(test1 + " = " + solution.romanToInt(test1)); // Output: 3
+        System.out.println(test2 + " = " + solution.romanToInt(test2)); // Output: 58
+        System.out.println(test3 + " = " + solution.romanToInt(test3)); // Output: 1994
+    }
+}
